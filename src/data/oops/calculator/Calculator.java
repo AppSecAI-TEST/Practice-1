@@ -14,11 +14,6 @@ public class Calculator {
 	
 	public Calculator() {
 		super();
-		Object [] a = {1,2,3};
-		Object x = a[1];
-		x = 4;
-		System.out.println(x);
-
 		add = new Addition();
 		subtract = new Subtraction();
 //		multiply = new MathOperation();

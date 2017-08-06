@@ -14,6 +14,7 @@ public abstract class Vehicle {
 	}
 
 	Ticket unpark() {
+		this.tkt.space.isVacant = true;
 		return this.tkt;
 	}
 }

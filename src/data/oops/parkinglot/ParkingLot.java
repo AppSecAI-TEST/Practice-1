@@ -5,7 +5,7 @@ import java.util.List;
 
 /**
  * 'ParkingLot' has 'ParkingSpace'(s)..... full, numberOf_Parkingspaces
- * 'ParkingSpaceTypes' : ['small, medium, 'big']
+ * 'ParkingSpaceTypes' : ['small, medium, 'big'] or vehicle types [BIKE, CAR, BUS]
  * 'Ticket' :
  * 'Vehicle' : --> Two-Wheeler, Car, Bus 
  *
@@ -46,25 +46,6 @@ public class ParkingLot {
 		}
 		return null;
 	}
-	
-	public int charge(Ticket tkt) {
-		VehicleType type = tkt.vehicle.getType();
-		int charge = 0;
-		switch (type) {
-		case BIKE:
-			charge = prices[0];
-			break;
-		case CAR:
-			charge = prices[1];
-			break;
-		case BUS:
-			charge = prices[2];
-			break;
-		default:
-			break;
-		}
-		return charge;
-	}
 
 }
 
@@ -73,6 +54,7 @@ class ParkingSpace {
 	boolean isVacant;
 	int distance;
 	VehicleType type;
+	int[] prices = { 10, 40, 50 };
 
 	public ParkingSpace(String name, boolean isVacant, int distance, VehicleType type) {
 		super();
@@ -80,6 +62,20 @@ class ParkingSpace {
 		this.isVacant = isVacant;
 		this.distance = distance;
 		this.type = type;
+	}
+
+	public int getPrice(VehicleType vType) {
+		switch (vType) {
+		case BIKE:
+			return prices[0];
+		case CAR:
+			return prices[1];
+		case BUS:
+			return prices[2];
+		default:
+			break;
+		}
+		return 0;
 	}
 }
 
@@ -94,11 +90,11 @@ class Ticket {
 		this.space = space;
 		this.vehicle = vehicle;
 	}
+	
+	public int charge() {
+		VehicleType type = vehicle.getType();
+		int charge = space.getPrice(type);
+		
+		return charge;
+	}
 }
-
-//enum VehicleType
-//{
-//  SMALL,
-//  MEDIUM,
-//  LARGE
-//}
